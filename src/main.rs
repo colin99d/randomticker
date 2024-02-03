@@ -1,4 +1,5 @@
 use crate::ticker_logic::get_valid_ticker;
+use axum::routing::get;
 use axum::Router;
 
 mod generate_random;

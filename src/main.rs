@@ -6,14 +6,14 @@ mod generate_random;
 mod statics;
 mod ticker_logic;
 
-#[tokio::main]
-async fn main() {
+#[shuttle_runtime::main]
+pub async fn axum() -> shuttle_axum::ShuttleAxum {
     let app = Router::new().route("/", get(get_ticker));
-    let listener = tokio::net::TcpListener::bind("0.0.0.0:8000").await.unwrap();
-    println!("Listening on {}", listener.local_addr().unwrap());
-    axum::serve(listener, app).await.unwrap();
+    // let listener = tokio::net::TcpListener::bind("0.0.0.0:8000").await.unwrap();
+    // println!("Listening on {}", listener.local_addr().unwrap());
+    Ok(app.into())
 }
 
 async fn get_ticker() -> String {
-    get_valid_ticker()    
+    get_valid_ticker()
 }
